@@ -1,0 +1,55 @@
+version: '3.8'
+services:
+  postgres_post:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=sammy
+      - POSTGRES_PASSWORD=your_password
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  postgres_user:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=your_password
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    
+  postgres_auth:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=sammy
+      - POSTGRES_PASSWORD=your_password
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+  
+  mongo_comments: 
+    image: mongo
+    volumes:
+      - mongodata:/data/db
+    restart: unless-stopped
+    command: [--auth]
+    ports: 
+      - "27017:27017"
+  
+  mongo_notifications: 
+    image: mongo
+    volumes:
+      - mongodata:/data/db
+    restart: unless-stopped
+    command: [--auth]
+    ports: 
+      - "27017:27017"
+
+volumes:
+  postgres:

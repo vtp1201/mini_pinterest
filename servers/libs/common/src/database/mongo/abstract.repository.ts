@@ -9,7 +9,7 @@ import {
 } from 'mongoose';
 import { AbstractDocument } from './abstract.schema';
 
-export abstract class AbstractRepository<TDocument extends AbstractDocument> {
+export abstract class AbstractRepositoryMongo<TDocument extends AbstractDocument> {
   protected abstract readonly logger: Logger;
 
   constructor(
